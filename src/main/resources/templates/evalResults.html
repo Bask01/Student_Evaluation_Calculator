@@ -1,0 +1,92 @@
+<!-- 
+/**
+ * The result page to display the result of the evaluation
+ * Thymeleaf dependencies are used to display model attributes 
+ * @author Kubra Bas
+ */ 
+ -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!--import thymeleaf namespace into the page-->
+<head>
+<meta charset="ISO-8859-1">
+<title>Evaluations</title>
+
+<!-- Call css file for page styling -->
+<link rel="stylesheet" href="../static/css/main.css"
+	th:href="@{/css/main.css}">
+</head>
+
+<body>
+
+
+	<!-- The page is designed in 5 parts: header, navigation, main and footer -->
+	
+	<!-- header part -->
+	<header>
+		
+		<hr  size="2" color="pink" ><!-- Draw a horizontal line pink color and 2px height-->
+		<h1>Evaluations</h1><!-- Print header -->
+		<hr  size="5" color="pink"><!-- Draw a horizontal line pink color and 5px height-->
+	</header><!--End of header-->
+	
+	<!--Navigation part, contains 4 buttons  -->
+	<nav>
+		 <a class="button" href="/">Main Menu</a>
+		 <a class="button" href="/evalc">Evaluation Calculator</a>
+		 <a class="button" href="">GPA Calculator</a>
+		 <a class="button" href="">Add Course</a>
+	</nav>
+
+    <!--
+    	/* main part: in this part Thymeleaf is used for retrieving and
+    	 * displaying the values from the object constructed and placed into
+         * the model attribution in the controller class 
+         */
+      -->
+    
+	<main>	
+		<div class="result">
+		
+			<!-- <span th:utext="${evaluation.toString()}"></span> -->
+			 
+			<p>
+			   <!-- get the title value -->
+			   <label>Evaluation:
+			  	 <span th:text="${evaluation.title}"></span>
+			   </label>
+			  	
+			   <!-- get the date --> 	 
+		   	   <label>Due:  
+		   	      <span th:text="${evaluation.dueDate}"></span>
+		   	   </label>
+		   	      
+			</p>
+		
+		    <p>
+		    	<!-- get the grade and format to 1 decimal place -->
+		        <label>Grade: 
+		     		<span th:text="${#numbers.formatDecimal(evaluation.grade,2,1)}"></span>
+		     			     	
+				<span>/</span>
+				
+				 <!-- get the maximum value and format to 1 decimal place -->
+				<span th:text="${#numbers.formatDecimal(evaluation.max,2,1)}"></span></label> 
+			</p>
+			
+		    <p>
+		      <!-- get the final weight value and format to 1 decimal place -->
+		      <label>Earned Weight: 		       
+		      	  <span th:text="${#numbers.formatDecimal(evaluation.calcGrade(),1,1)}"></span>
+		      </label> 
+			</p>
+					
+		</div>	<!--end of div -->
+	</main><!--End main part-->
+	
+	<!--footer part-->
+	<footer>
+	     <h3 id="copyright">&copy; 2021 Sheridan College</h3><!--print @2021 Sheridan College  -->
+	</footer><!--End of footer  -->
+
+</body>
+</html>
